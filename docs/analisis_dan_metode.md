@@ -4,13 +4,29 @@ Dokumen ini berisi ringkasan teknis dan perbandingan metode AI yang relevan untu
 
 ---
 
-## 1. Ringkasan Proyek: Analisis, Rancangan, dan Metode
+## 1. Analisis, Rancangan, dan Metode
 
 ### **🎯 Analisis Masalah (Inti Masalah)**
 
-- **Masalah Visual**: Kabut menghalangi kamera, membuat sistem monitoring AI lain (untuk hama/penyakit) menjadi tidak efektif.
-- **Masalah Agronomi**: Kabut menciptakan kelembaban ekstrem (>95%), yang memicu penyakit jamur dan menghambat pertumbuhan anggrek.
-- **Solusi**: Sistem AI yang secara visual mengenali tekstur kabut dan secara otomatis mengaktifkan kipas untuk menormalkan kondisi.
+Proyek ini berangkat dari identifikasi tiga masalah fundamental yang disebabkan oleh kabut di dalam _greenhouse_, yang tidak dapat diselesaikan secara efektif oleh sistem pemantauan konvensional.
+
+### **🔬 Ancaman Agronomi**
+
+Kabut secara langsung menciptakan lingkungan mikro yang ideal bagi patogen. Kelembaban udara yang jenuh (>95%) secara signifikan meningkatkan risiko serangan **penyakit jamur** seperti _Botrytis_ (busuk bunga) dan busuk hitam, yang dapat menyebar dengan cepat dan menyebabkan kerugian panen. Lebih dari itu, kabut **menghambat proses transpirasi** tanaman, yaitu pelepasan uap air yang esensial untuk menarik nutrisi dari akar. Jika proses ini terganggu dalam waktu lama, pertumbuhan anggrek dapat terhambat dan menjadi kerdil.
+
+### **📸 Kegagalan Sistem Monitoring**
+
+_Greenhouse_ modern mengandalkan sistem monitoring visual berbasis AI untuk memantau kesehatan tanaman. Kabut berfungsi sebagai **penghalang visual** yang membuat input data dari kamera menjadi tidak dapat diandalkan. Ini menyebabkan **kegagalan beruntun**: model AI untuk deteksi hama atau penyakit akan salah menginterpretasikan gambar yang buram, data analisis pertumbuhan menjadi tidak valid, dan kemampuan pengelola untuk memantau secara visual dari jarak jauh menjadi lumpuh total.
+
+### **📟 Keterbatasan Sensor Konvensional**
+
+Sensor kelembaban (seperti DHT22) memang dapat mendeteksi udara yang lembab, namun memiliki kelemahan kritis:
+
+- **Tidak Membedakan Sumber**: Sensor tidak bisa membedakan antara kelembaban tinggi akibat penyiraman, penguapan normal, atau kabut tebal yang menghalangi pandangan.
+- **Tidak Mewakili Kondisi Visual**: Nilai kelembaban 99% tidak memberi tahu kita apakah kamera masih bisa "melihat" atau sudah "buta" total.
+  Oleh karena itu, **deteksi berbasis citra (AI Camera)** menjadi satu-satunya solusi yang dapat mengukur dampak kabut terhadap visibilitas secara langsung.
+
+---
 
 ### **⚙️ Rancangan Sistem (Alur Kerja)**
 
@@ -28,7 +44,31 @@ Dokumen ini berisi ringkasan teknis dan perbandingan metode AI yang relevan untu
 
 ---
 
-## 2. Perbandingan Metode AI (Selain CNN Standar)
+## 2. Pengembangan Ide dan Inovasi (Fitur Lanjutan)
+
+Untuk meningkatkan nilai kebaruan proyek, berikut adalah beberapa ide inovatif yang dapat dikembangkan dari sistem dasar, dengan kompleksitas yang masih masuk akal untuk tugas akhir:
+
+### **💡 Ide 1: Deteksi Kabut Prediktif**
+
+- **Konsep**: Alih-alih hanya bereaksi saat kabut sudah tebal, sistem dapat **memprediksi** potensi terbentuknya kabut tebal.
+- **Cara Kerja**: Sistem tidak hanya menganalisis satu gambar, tetapi **membandingkan beberapa gambar terakhir** (misalnya, gambar dari 5 dan 10 menit yang lalu). Jika model mendeteksi adanya **peningkatan densitas kabut yang signifikan dan cepat**, sistem dapat mengaktifkan kipas secara **preventif** sebelum visibilitas hilang total.
+- **Tingkat Kesulitan**: Menengah. Memerlukan penambahan logika untuk menyimpan dan membandingkan hasil prediksi sebelumnya.
+
+### **💡 Ide 2: Kontrol Kipas Adaptif**
+
+- **Konsep**: Daripada hanya ON/OFF, kecepatan putaran kipas **disesuaikan dengan tingkat ketebalan kabut**.
+- **Cara Kerja**: Nilai _confidence_ dari prediksi AI (misalnya 85% vs 98% `Berkabut`) dapat dipetakan untuk mengatur kecepatan kipas melalui sinyal **PWM (Pulse Width Modulation)** ke _driver motor_. Jika kabut tipis (keyakinan 85%), kipas berputar pelan. Jika kabut sangat tebal (keyakinan 98%), kipas berputar dengan kecepatan maksimal.
+- **Tingkat Kesulitan**: Menengah. Memerlukan penambahan komponen _driver motor_ L298N dan sedikit modifikasi pada kode kontrol. Inovasi ini sangat baik karena menonjolkan aspek **efisiensi energi**.
+
+### **💡 Ide 3: Integrasi Data Cuaca Eksternal**
+
+- **Konsep**: Membuat sistem lebih "sadar" akan kondisi di luar _greenhouse_.
+- **Cara Kerja**: Sistem secara periodik mengambil data **prakiraan cuaca** dari internet melalui **API publik** (seperti OpenWeatherMap). Jika prakiraan menunjukkan akan ada **penurunan suhu drastis** atau **hujan lebat** dalam satu jam ke depan (kondisi pemicu kabut), sistem dapat masuk ke mode **"Siaga Tinggi"**, di mana frekuensi pengambilan gambar ditingkatkan (misalnya dari setiap 10 menit menjadi setiap 2 menit) untuk deteksi yang lebih cepat.
+- **Tingkat Kesulitan**: Rendah ke Menengah. Hanya memerlukan penambahan beberapa baris kode untuk melakukan permintaan API.
+
+---
+
+## 3. Perbandingan Metode AI (Selain CNN Standar)
 
 Meskipun CNN adalah pilihan yang sangat solid, ada arsitektur lain yang bisa dipertimbangkan. "Lebih baik" di sini diukur berdasarkan potensi akurasi dan efisiensi.
 
