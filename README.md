@@ -9,7 +9,7 @@ Repositori ini adalah pusat pengembangan untuk Tugas Akhir berjudul **"Rancang B
 
 ---
 
-### ## Daftar Isi
+### Daftar Isi
 
 1.  [Latar Belakang Masalah](#-latar-belakang-masalah)
 2.  [Solusi yang Diusulkan](#-solusi-yang-diusulkan)
@@ -22,7 +22,7 @@ Repositori ini adalah pusat pengembangan untuk Tugas Akhir berjudul **"Rancang B
 
 ---
 
-### ## 📜 Latar Belakang Masalah
+### 📜 Latar Belakang Masalah
 
 Budidaya anggrek dalam _greenhouse_ menghadapi dua tantangan utama yang disebabkan oleh **kabut**:
 
@@ -31,7 +31,7 @@ Budidaya anggrek dalam _greenhouse_ menghadapi dua tantangan utama yang disebabk
 
 ---
 
-### ## 💡 Solusi yang Diusulkan
+### 💡 Solusi yang Diusulkan
 
 Proyek ini membangun sebuah sistem cerdas dan otonom yang mampu:
 
@@ -43,7 +43,7 @@ Proyek ini membangun sebuah sistem cerdas dan otonom yang mampu:
 
 ---
 
-### ## ✨ Fitur Utama
+### ✨ Fitur Utama
 
 - **Deteksi Cerdas**: Klasifikasi kondisi `Berkabut` / `Tidak Berkabut` secara _real-time_.
 - **Kontrol Otomatis**: Aktivasi kipas _exhaust_ berdasarkan hasil prediksi AI.
@@ -52,7 +52,7 @@ Proyek ini membangun sebuah sistem cerdas dan otonom yang mampu:
 
 ---
 
-### ## 🛠️ Arsitektur Sistem
+### 🛠️ Arsitektur Sistem
 
 Sistem ini dirancang dengan arsitektur terdistribusi yang terdiri dari unit perangkat keras di lapangan dan _platform_ monitoring di _cloud_.
 
@@ -74,7 +74,7 @@ Sistem ini dirancang dengan arsitektur terdistribusi yang terdiri dari unit pera
 
 ---
 
-### ## 🎬 Demonstrasi (Mockup)
+### 🎬 Demonstrasi (Mockup)
 
 Berikut adalah gambaran bagaimana sistem direncanakan akan bekerja. Simulasi ini menunjukkan alur kerja dari deteksi kondisi "Berkabut" hingga aktivasi kipas, lalu kembali ke kondisi normal.
 
@@ -82,7 +82,7 @@ Berikut adalah gambaran bagaimana sistem direncanakan akan bekerja. Simulasi ini
 
 ---
 
-### ## 💻 Teknologi yang Digunakan
+### 💻 Teknologi yang Digunakan
 
 - **Bahasa Pemrograman**: Python
 - **Framework AI**: TensorFlow / Keras
@@ -92,4 +92,4 @@ Berikut adalah gambaran bagaimana sistem direncanakan akan bekerja. Simulasi ini
 
 ---
 
-### ## 📂 Struktur Repositori
+### 📂 Struktur Repositori
